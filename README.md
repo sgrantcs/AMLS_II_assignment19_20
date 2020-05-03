@@ -12,6 +12,8 @@ sklearn for classification, including the following  :
 nltk for text preprosessing: PorterStemmer
 
 ### Other required files 
+Both TaskA and TaskD can be run from main.py, which has both tasks imported.
+
 
 2. AMLSII Project File Organisation: 
 $ -- AMLSII_19-20_SN19132626

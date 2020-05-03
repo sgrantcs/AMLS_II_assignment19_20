@@ -5,6 +5,11 @@ import string
 import nltk
 from nltk.stem.porter import *
 
+'''
+The code for the tweet clean-up was adapted from the following post by Anas Al-Asri:
+https://towardsdatascience.com/creating-the-twitter-sentiment-analysis-program-in-python-with-naive-bayes-classification-672e5589a7ed
+'''
+
 def remove_pattern(input_txt, pattern):
 #    print(pattern, input_txt)
     r = re.findall(pattern, input_txt)

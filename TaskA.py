@@ -61,5 +61,6 @@ def run_task_A():
     from sklearn import metrics 
     print("Multinomial Task A Naive Bayes model accuracy(in %):", metrics.accuracy_score(yvalid, y_pred)*100)
     print("Multinomial Task A Naive Bayes model precision(in %):", metrics.precision_score(yvalid, y_pred, average='macro')*100)
+    print("Multinomial Task A Naive Bayes model Recall score (in %):", metrics.recall_score(yvalid, y_pred, average='macro')*100)
     print("Multinomial Task A Naive Bayes model F1 score (in %):", metrics.f1_score(yvalid, y_pred, average='macro')*100)
 

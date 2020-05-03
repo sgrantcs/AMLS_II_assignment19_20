@@ -15,6 +15,7 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 from sklearn.metrics import confusion_matrix
 from collections import Counter
 from Processing import process_tweets
@@ -50,6 +51,7 @@ def run_task_D():
     print("Multinomial Task D Naive Bayes model accuracy(in %):", metrics.accuracy_score(yvalid, y_pred)*100)
     print("Multinomial Task D Naive Bayes model precision(in %):", metrics.precision_score(yvalid, y_pred, pos_label='1')*100)
     print("Multinomial Task D Naive Bayes model F1 score (in %):", metrics.f1_score(yvalid, y_pred, pos_label='1')*100)
+    print("Multinomial Task D Naive Bayes model Recall score (in %):", metrics.recall_score(yvalid, y_pred, pos_label='1')*100)
 
     #Classify and count tweet quantifier method
     count = (Counter(y_pred))
@@ -61,19 +63,19 @@ def run_task_D():
     #print(pos)
     cc = ((pos/(pos + neg))*100)
     #print(cc)    
-    print("The number of positives based on Classify and Count approach is "+ str(cc) + "%.") 
-
+    print("The number of positives based on Classify and Count approach (in %) "+ str(cc) + ".") 
+    
     #compare yvalid and y_pred to establish the share of true positives and false positives
     #calculate confusion matrix
     confusion_matrix(yvalid, y_pred)
     tn, fp, fn, tp = confusion_matrix(yvalid, y_pred).ravel()
     (tn, fp, fn, tp)
-    #calculate tpr and fpr by using the elements of the confusion matrix
+    #calculate tpr and fpr by using the above elements of the confusion matrix
     tpr = tp/(tp + fn)
     fpr = fp/(fp + tn)
     #print(tpr, fpr)
 
     #Quantify using Adjusted Count method
-    ac = (((cc - fpr)/(tpr - fpr))*100)
-    print("The number of positives based on Adjusted Count method is "+ str(ac) + "%.") 
+    ac = ((cc/100 - fpr)/(tpr - fpr))*100
+    print("The number of positives based on Adjusted Count method (in %) "+ str(ac) + ".") 
     
