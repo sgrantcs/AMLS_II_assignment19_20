@@ -2,6 +2,7 @@
 import re
 import pandas as pd 
 import numpy as np 
+from numpy import mean
 import matplotlib.pyplot as plt 
 import string
 import nltk
@@ -46,7 +47,9 @@ def run_task_D():
     classifier = MultinomialNB()
     classifier.fit(xtrain_bow, ytrain)
     # making predictions on the testing set 
-    y_pred = classifier.predict(xvalid_bow) 
+    y_pred = classifier.predict(xvalid_bow)
+    y_predproba = classifier.predict_proba(xvalid_bow) #outputs probability of two class labels 
+    y_predprob1 = classifier.predict_proba(xvalid_bow)[:, 1] #outputs probability of positive class    
 
     print("Multinomial Task D Naive Bayes model accuracy(in %):", metrics.accuracy_score(yvalid, y_pred)*100)
     print("Multinomial Task D Naive Bayes model precision(in %):", metrics.precision_score(yvalid, y_pred, pos_label='1')*100)
@@ -78,4 +81,8 @@ def run_task_D():
     #Quantify using Adjusted Count method
     ac = ((cc/100 - fpr)/(tpr - fpr))*100
     print("The number of positives based on Adjusted Count method (in %) "+ str(ac) + ".") 
+    
+    #Quantify using Probabilistic Classify & Count method
+    pcc = mean(y_predprob1)*100 #calculate average probability of positive class 1
+    print("The share of positive tweets based on Probabilistic Classify & Count method (in %) "+ str(pcc) + ".") 
     
